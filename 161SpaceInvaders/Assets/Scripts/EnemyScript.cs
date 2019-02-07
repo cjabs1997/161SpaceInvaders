@@ -19,13 +19,6 @@ public class EnemyScript : MonoBehaviour
 	void Start()
 	{
 		m_rigidbody.velocity = new Vector2(moveSpeed, m_rigidbody.velocity.y);
-		OnWallCollide.AddListener(dropNswap);
-	}
-
-	void dropNswap()
-	{
-		transform.position = new Vector3(transform.position.x, transform.position.y-1, transform.position.z);
-		m_rigidbody.velocity = new Vector2(-m_rigidbody.velocity.x, m_rigidbody.velocity.y);
 	}
 
     void OnCollisionEnter2D(Collision2D collision)
