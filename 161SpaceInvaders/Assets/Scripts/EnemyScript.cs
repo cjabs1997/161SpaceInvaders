@@ -9,23 +9,40 @@ public class EnemyScript : MonoBehaviour
 {
 	public EnemyEvent OnWallCollide = new EnemyEvent();
 	public float moveSpeed;
-	private Rigidbody2D m_rigidbody;
+    public float shootSpeed;
+
+    private Shoot m_shoot;
+    private Rigidbody2D m_rigidbody;
+    private Transform m_transform;
 
 	void Awake()
 	{
 		m_rigidbody = this.GetComponent<Rigidbody2D>();
-	}
+        m_transform = this.GetComponent<Transform>();
+        m_shoot = this.GetComponent<Shoot>();
+    }
 
 	void Start()
 	{
 		m_rigidbody.velocity = new Vector2(moveSpeed, m_rigidbody.velocity.y);
 	}
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
-    	if(collision.collider.gameObject.CompareTag("Wall"))
+    	if(collider.gameObject.CompareTag("Wall"))
     	{
     		OnWallCollide.Invoke();
     	}
+
+        if (collider.gameObject.CompareTag("playerBullet"))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    public void Shoot()
+    {
+        Vector2 bulletSpawn = new Vector2(m_transform.position.x, m_transform.position.y - 0.5f);
+        m_shoot.shoot(bulletSpawn, Vector2.down, shootSpeed);
     }
 }

@@ -6,7 +6,7 @@ public class EnemyBullet : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D other)
     {
-    	if(!other.gameObject.CompareTag("Enemy"))
+    	if(other.gameObject.CompareTag("Player") || other.gameObject.CompareTag("Wall"))
     	{
     		Destroy(this.gameObject);
     	}

@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     private Transform m_transform;
     private Shoot m_shoot;
 
-    public float shootSpeed = 5.0f;
+    public float shootSpeed = 8.0f;
     public float moveSpeed = 10.0f;
 
     // Start is called before the first frame update
@@ -26,7 +26,8 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
         {
-            Shoot();
+            if (GameObject.FindGameObjectWithTag("playerBullet") == null)
+                Shoot();
         }
     }
 
@@ -41,7 +42,7 @@ public class Player : MonoBehaviour
     private void Shoot()
     {
         Vector2 bulletSpawn = new Vector2(m_transform.position.x, m_transform.position.y + 0.5f);
-        m_shoot.shoot(m_transform.position, Vector2.up, shootSpeed);
+        m_shoot.shoot(bulletSpawn, Vector2.up, shootSpeed);
     }
 
 }
