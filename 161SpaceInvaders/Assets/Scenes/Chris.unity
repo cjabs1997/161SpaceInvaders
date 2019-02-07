@@ -360,7 +360,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_SensorSize: {x: 36, y: 24}
   m_LensShift: {x: 0, y: 0}
@@ -512,26 +512,54 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!1 &2003403486 stripped
+--- !u!1 &1714969187
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 348788904830062174, guid: f55ecac48330ed24cb5f1ee137cc8af7,
-    type: 3}
-  m_PrefabInstance: {fileID: 348788905041448064}
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2003403490
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1714969189}
+  - component: {fileID: 1714969188}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1714969188
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2003403486}
+  m_GameObject: {fileID: 1714969187}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5090cebf7c07616428b2dd93b9b00103, type: 3}
+  m_Script: {fileID: 11500000, guid: 83a5fc2e752a8c14c8b77959f5766da8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootSpeed: 5
-  moveSpeed: 10
+  enemyPrefab: {fileID: 5900116416932537096, guid: a2cca25151db4344799787ea6ae6f1c3,
+    type: 3}
+  enemyBulletPrefab: {fileID: 2902067666017816252, guid: 67dcf20382b6f88458a52b24e8ecb0f8,
+    type: 3}
+  startPosition: {fileID: 1714969189}
+--- !u!4 &1714969189
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714969187}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -5, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &348788905041448064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -599,19 +627,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1905366345196387610, guid: f55ecac48330ed24cb5f1ee137cc8af7,
-        type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 7349091674132969689, guid: 1445431852837514faed6fb4865a081d,
-        type: 3}
-    - target: {fileID: 6217823304925110316, guid: f55ecac48330ed24cb5f1ee137cc8af7,
-        type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 7349091674132969689, guid: 1445431852837514faed6fb4865a081d,
-        type: 3}
-    m_RemovedComponents:
-    - {fileID: 348788904830062178, guid: f55ecac48330ed24cb5f1ee137cc8af7, type: 3}
-    - {fileID: 5202145833334834881, guid: f55ecac48330ed24cb5f1ee137cc8af7, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f55ecac48330ed24cb5f1ee137cc8af7, type: 3}
