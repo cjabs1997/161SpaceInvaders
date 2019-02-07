@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
                 GameObject newEnemy = Instantiate(enemyPrefab, spawnPostion, Quaternion.identity);
 
                 newEnemy.GetComponent<Shoot>().bullet = enemyBulletPrefab;
+                newEnemy.GetComponent<EnemyScript>().moveSpeed = 2.0f;
 
                 enemyGrid[x].Add(newEnemy);
             }
