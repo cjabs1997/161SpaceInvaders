@@ -66,7 +66,9 @@ public class GameManager : MonoBehaviour
                     if(enemyGrid[x][y] != null)
                     {
                         enemyGrid[x][y].GetComponent<Transform>().position = new Vector2(enemyGrid[x][y].GetComponent<Transform>().position.x, enemyGrid[x][y].GetComponent<Transform>().position.y-1);
-                        enemyGrid[x][y].GetComponent<Rigidbody2D>().velocity = new Vector2(-enemyGrid[x][y].GetComponent<Rigidbody2D>().velocity.x, 0.0f);
+
+                        enemyGrid[x][y].GetComponent<EnemyScript>().moveSpeed = -enemyGrid[x][y].GetComponent<EnemyScript>().moveSpeed;
+                        enemyGrid[x][y].GetComponent<Rigidbody2D>().velocity = new Vector2(enemyGrid[x][y].GetComponent<EnemyScript>().moveSpeed, 0.0f);
                     }
                 }
             }
