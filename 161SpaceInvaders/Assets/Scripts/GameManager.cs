@@ -8,19 +8,32 @@ public class GameManager : MonoBehaviour
     public GameObject enemyBulletPrefab;
     public Transform startPosition;
 
+    private bool justSwapped;
+    private float count;
+
     private List<List<GameObject>> enemyGrid = new List<List<GameObject>>();
 
 
     // Start is called before the first frame update
     void Start()
     {
+        justSwapped = false;
+        count = 0;
         SpawnEnemies();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(justSwapped)
+        {
+            count += Time.deltaTime;
+        }
+
+        if(count>=1)
+        {
+            justSwapped = false;
+        }
     }
 
     void SpawnEnemies()
@@ -44,16 +57,20 @@ public class GameManager : MonoBehaviour
 
     void DropAndSwap()
     {
-        for (int x = 0; x < 11; x++)
+        if(!justSwapped)
         {
-            for (int y = 0; y < 5; y++)
+            for (int x = 0; x < 11; x++)
             {
-                if(enemyGrid[x][y] != null)
+                for (int y = 0; y < 5; y++)
                 {
-                    enemyGrid[x][y].GetComponent<Transform>().position = new Vector2(enemyGrid[x][y].GetComponent<Transform>().position.x, enemyGrid[x][y].GetComponent<Transform>().position.y-1);
-                    enemyGrid[x][y].GetComponent<Rigidbody2D>().velocity = new Vector2(-enemyGrid[x][y].GetComponent<Rigidbody2D>().velocity.x, 0.0f);
+                    if(enemyGrid[x][y] != null)
+                    {
+                        enemyGrid[x][y].GetComponent<Transform>().position = new Vector2(enemyGrid[x][y].GetComponent<Transform>().position.x, enemyGrid[x][y].GetComponent<Transform>().position.y-1);
+                        enemyGrid[x][y].GetComponent<Rigidbody2D>().velocity = new Vector2(-enemyGrid[x][y].GetComponent<Rigidbody2D>().velocity.x, 0.0f);
+                    }
                 }
             }
+            justSwapped = true;
         }
     }
 }
