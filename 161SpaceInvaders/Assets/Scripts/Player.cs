@@ -10,6 +10,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D m_rgb2d;
     private Transform m_transform;
     private Shoot m_shoot;
+    private bool shooting = true;
 
     public PlayerEvent OnHit = new PlayerEvent();
     public float shootSpeed = 8.0f;
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
         m_rgb2d = this.GetComponent<Rigidbody2D>();
         m_transform = this.GetComponent<Transform>();
         m_shoot = this.GetComponent<Shoot>();
+        GameManager.instance.EndGame.AddListener(toggleShooting);
     }
 
     // Update is called once per frame
@@ -34,11 +36,16 @@ public class Player : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0))
+        if (shooting && (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0)))
         {
             if (GameObject.FindGameObjectWithTag("playerBullet") == null)
                 Shoot();
         }
+    }
+
+    private void toggleShooting()
+    {
+        shooting = !shooting;
     }
 
     private void Move()

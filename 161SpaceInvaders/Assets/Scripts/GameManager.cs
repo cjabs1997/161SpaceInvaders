@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public IntEvent updateScore = new IntEvent();
     public IntEvent updateLives = new IntEvent();
+    public UnityEvent EndGame = new UnityEvent();
 
     private bool justSwapped;
     private float count;
@@ -33,7 +34,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = Player.instance;
         player.OnHit.AddListener(LoseLife);
         justSwapped = false;
         count = 0;
@@ -139,7 +140,10 @@ public class GameManager : MonoBehaviour
     private void checkWin()
     {
         if(EnemyScript.numAliens <= 0)
+        {
             Time.timeScale = 0;
+            EndGame.Invoke();
+        }
     }
 
     private void GameOver()
