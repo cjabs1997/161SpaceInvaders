@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject enemyBulletPrefab;
     public Transform startPosition;
+    public static GameManager instance;
+    public UnityEvent updateScore = new UnityEvent();
+    public int score;
 
     private bool justSwapped;
     private float count;
@@ -14,9 +18,13 @@ public class GameManager : MonoBehaviour
     private float shootInterval;
     private Player player;
     [SerializeField] private int playerLives;
-    [SerializeField] private int score;
 
     private List<List<GameObject>> enemyGrid = new List<List<GameObject>>();
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
 
     // Start is called before the first frame update
@@ -77,7 +85,6 @@ public class GameManager : MonoBehaviour
             }
         }
     }
-
 
     void DropAndSwap()
     {
@@ -160,5 +167,6 @@ public class GameManager : MonoBehaviour
     private void UpdateScore(int scoreGained)
     {
         score += scoreGained;
+        updateScore.Invoke();
     }
 }
