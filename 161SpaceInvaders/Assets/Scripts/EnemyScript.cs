@@ -19,7 +19,6 @@ public class EnemyScript : MonoBehaviour
     private Shoot m_shoot;
     private Rigidbody2D m_rigidbody;
     private Transform m_transform;
-    private int m_score;
 
 	void Awake()
 	{
@@ -27,7 +26,6 @@ public class EnemyScript : MonoBehaviour
 		m_rigidbody = this.GetComponent<Rigidbody2D>();
         m_transform = this.GetComponent<Transform>();
         m_shoot = this.GetComponent<Shoot>();
-        m_score = 10;
     }
 
 	void Start()
@@ -44,7 +42,7 @@ public class EnemyScript : MonoBehaviour
 
         if (collider.gameObject.CompareTag("playerBullet"))
         {
-            OnDeath.Invoke(m_score);
+            OnDeath.Invoke(points);
             Destroy(this.gameObject);
         }
     }
