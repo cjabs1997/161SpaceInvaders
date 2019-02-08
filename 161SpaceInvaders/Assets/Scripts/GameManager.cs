@@ -87,6 +87,7 @@ public class GameManager : MonoBehaviour
                 newEnemy.GetComponent<EnemyScript>().points = AssignPoints(y);
                 newEnemy.GetComponent<EnemyScript>().OnWallCollide.AddListener(DropAndSwap);
                 newEnemy.GetComponent<EnemyScript>().OnDeath.AddListener(UpdateScore);
+                newEnemy.GetComponent<EnemyScript>().OnBottomScreen.AddListener(endGame);
 
                 enemyGrid[x].Add(newEnemy);
             }
@@ -138,12 +139,17 @@ public class GameManager : MonoBehaviour
         GameOver();
     }
 
+    private void endGame()
+    {
+        Time.timeScale = 0;
+        EndGame.Invoke();
+    }
+
     private void checkWin()
     {
         if(EnemyScript.numAliens <= 0)
         {
-            Time.timeScale = 0;
-            EndGame.Invoke();
+            endGame();
         }
     }
 
@@ -151,8 +157,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerLives <= 0)
         {
-            Time.timeScale = 0;
-            EndGame.Invoke();
+            endGame();
             player.gameObject.SetActive(false);
         }
     }

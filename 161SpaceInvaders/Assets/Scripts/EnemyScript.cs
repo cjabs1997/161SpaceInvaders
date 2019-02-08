@@ -12,6 +12,7 @@ public class EnemyScript : MonoBehaviour
 
 	public EnemyEvent OnWallCollide = new EnemyEvent();
     public DeathEvent OnDeath = new DeathEvent();
+    public EnemyEvent OnBottomScreen = new EnemyEvent();
 	public float moveSpeed;
     public float shootSpeed;
     public int points;
@@ -31,6 +32,12 @@ public class EnemyScript : MonoBehaviour
 	void Start()
 	{
 		m_rigidbody.velocity = new Vector2(moveSpeed, m_rigidbody.velocity.y);
+	}
+
+	void Update()
+	{
+		if(transform.position.y <= -9)
+			OnBottomScreen.Invoke();
 	}
 
     void OnTriggerEnter2D(Collider2D collider)
