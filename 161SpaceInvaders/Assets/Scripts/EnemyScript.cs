@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     public EnemyEvent OnDeath = new EnemyEvent();
 	public float moveSpeed;
     public float shootSpeed;
+    public int points;
 
     private Shoot m_shoot;
     private Rigidbody2D m_rigidbody;

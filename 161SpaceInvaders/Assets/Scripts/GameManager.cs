@@ -66,15 +66,18 @@ public class GameManager : MonoBehaviour
                 GameObject newEnemy = Instantiate(enemyPrefab, spawnPostion, Quaternion.identity);
 
                 newEnemy.GetComponent<Shoot>().bullet = enemyBulletPrefab;
+
                 newEnemy.GetComponent<EnemyScript>().moveSpeed = 2.0f;
                 newEnemy.GetComponent<EnemyScript>().shootSpeed = 5.0f;
+                newEnemy.GetComponent<EnemyScript>().points = AssignPoints(y);
                 newEnemy.GetComponent<EnemyScript>().OnWallCollide.AddListener(DropAndSwap);
-                newEnemy.GetComponent<EnemyScript>().OnDeath.AddListener(GameOver);
+                newEnemy.GetComponent<EnemyScript>().OnDeath.AddListener(UpdateScore);
 
                 enemyGrid[x].Add(newEnemy);
             }
         }
     }
+
 
     void DropAndSwap()
     {
@@ -142,5 +145,15 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
             player.gameObject.SetActive(false);
         }
+    }
+
+    private int AssignPoints(int y)
+    {
+        if (y <= 1)
+            return 10;
+        else if (y == 2 || y == 3)
+            return 20;
+        else
+            return 40;
     }
 }
