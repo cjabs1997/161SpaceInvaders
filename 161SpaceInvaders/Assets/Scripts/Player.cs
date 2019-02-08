@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
     {
         Move();
 
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.Mouse0))
         {
             if (GameObject.FindGameObjectWithTag("playerBullet") == null)
                 Shoot();

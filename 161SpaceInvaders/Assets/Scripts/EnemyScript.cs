@@ -8,6 +8,7 @@ public class EnemyEvent : UnityEvent{}
 public class EnemyScript : MonoBehaviour
 {
 	public EnemyEvent OnWallCollide = new EnemyEvent();
+    public EnemyEvent OnDeath = new EnemyEvent();
 	public float moveSpeed;
     public float shootSpeed;
 
@@ -36,6 +37,7 @@ public class EnemyScript : MonoBehaviour
 
         if (collider.gameObject.CompareTag("playerBullet"))
         {
+            OnDeath.Invoke();
             Destroy(this.gameObject);
         }
     }

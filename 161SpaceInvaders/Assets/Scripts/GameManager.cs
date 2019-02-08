@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
                 newEnemy.GetComponent<EnemyScript>().moveSpeed = 2.0f;
                 newEnemy.GetComponent<EnemyScript>().shootSpeed = 5.0f;
                 newEnemy.GetComponent<EnemyScript>().OnWallCollide.AddListener(DropAndSwap);
+                newEnemy.GetComponent<EnemyScript>().OnDeath.AddListener(GameOver);
 
                 enemyGrid[x].Add(newEnemy);
             }
@@ -96,10 +97,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    bool checkEmpty()
+    {
+        for (int x = 0; x < 11; ++x)
+        {
+            for (int y = 0; y < 5; ++y)
+            {
+                if (enemyGrid[x][y] != null)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     private void EnemyShoot()
     {
         bool shot = false;
-        while(!shot)
+        while(!shot && !checkEmpty())
         {
             int shootCol = Random.Range(0, enemyGrid.Count);
             for(int n = 0; n<enemyGrid[shootCol].Count && !shot; ++n)
@@ -121,7 +137,7 @@ public class GameManager : MonoBehaviour
 
     private void GameOver()
     {
-        if (playerLives <= 0)
+        if (playerLives <= 0 || checkEmpty())
         {
             Time.timeScale = 0;
             player.gameObject.SetActive(false);
