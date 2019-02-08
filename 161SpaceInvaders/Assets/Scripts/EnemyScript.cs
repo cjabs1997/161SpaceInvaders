@@ -4,11 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 
 public class EnemyEvent : UnityEvent{}
+public class DeathEvent : UnityEvent<int>{}
 
 public class EnemyScript : MonoBehaviour
 {
+	static int numAliens = 0;
+
 	public EnemyEvent OnWallCollide = new EnemyEvent();
-    public EnemyEvent OnDeath = new EnemyEvent();
+    public DeathEvent OnDeath = new DeathEvent();
 	public float moveSpeed;
     public float shootSpeed;
     public int points;
@@ -16,12 +19,15 @@ public class EnemyScript : MonoBehaviour
     private Shoot m_shoot;
     private Rigidbody2D m_rigidbody;
     private Transform m_transform;
+    private int m_score;
 
 	void Awake()
 	{
+		++numAliens;
 		m_rigidbody = this.GetComponent<Rigidbody2D>();
         m_transform = this.GetComponent<Transform>();
         m_shoot = this.GetComponent<Shoot>();
+        m_score = 10;
     }
 
 	void Start()
@@ -38,7 +44,7 @@ public class EnemyScript : MonoBehaviour
 
         if (collider.gameObject.CompareTag("playerBullet"))
         {
-            OnDeath.Invoke();
+            OnDeath.Invoke(m_score);
             Destroy(this.gameObject);
         }
     }
