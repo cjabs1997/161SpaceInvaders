@@ -1,6 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+public class PlayerEvent : UnityEvent { }
 
 public class Player : MonoBehaviour
 {
@@ -8,6 +11,7 @@ public class Player : MonoBehaviour
     private Transform m_transform;
     private Shoot m_shoot;
 
+    public PlayerEvent OnHit = new PlayerEvent();
     public float shootSpeed = 8.0f;
     public float moveSpeed = 10.0f;
 
@@ -45,4 +49,11 @@ public class Player : MonoBehaviour
         m_shoot.shoot(bulletSpawn, Vector2.up, shootSpeed);
     }
 
+    private void OnTriggerEnter2D(Collider2D collider)
+    {
+        if(collider.gameObject.CompareTag("enemybullet"))
+        {
+            OnHit.Invoke();
+        }
+    }
 }

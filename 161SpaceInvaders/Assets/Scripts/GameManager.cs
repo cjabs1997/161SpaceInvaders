@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     private float count;
     private float shootTimer;
     private float shootInterval;
+    private Player player;
+    [SerializeField] private int playerLives;
+    [SerializeField] private int score;
 
     private List<List<GameObject>> enemyGrid = new List<List<GameObject>>();
 
@@ -19,9 +22,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player.OnHit.AddListener(LoseLife);
         justSwapped = false;
         count = 0;
         shootTimer = 0;
+        playerLives = 3;
+        score = 0;
         shootInterval = Random.Range(2.0f, 4.0f);
         SpawnEnemies();
     }
@@ -103,6 +110,21 @@ public class GameManager : MonoBehaviour
                     shot = true;
                 }
             }
+        }
+    }
+
+    private void LoseLife()
+    {
+        --playerLives;
+        GameOver();
+    }
+
+    private void GameOver()
+    {
+        if (playerLives <= 0)
+        {
+            Time.timeScale = 0;
+            player.gameObject.SetActive(false);
         }
     }
 }
