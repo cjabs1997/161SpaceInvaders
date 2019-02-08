@@ -156,4 +156,9 @@ public class GameManager : MonoBehaviour
         else
             return 40;
     }
+
+    private void UpdateScore(int scoreGained)
+    {
+        score += scoreGained;
+    }
 }
