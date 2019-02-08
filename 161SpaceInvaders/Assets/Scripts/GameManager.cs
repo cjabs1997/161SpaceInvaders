@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public class IntEvent : UnityEvent<int> {}
+
 public class GameManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public GameObject enemyBulletPrefab;
     public Transform startPosition;
     public static GameManager instance;
-    public UnityEvent updateScore = new UnityEvent();
-    public int score;
+    public IntEvent updateScore = new IntEvent();
+    private int score;
 
     private bool justSwapped;
     private float count;
@@ -44,6 +46,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        checkWin();
+
         if(justSwapped)
         {
             count += Time.deltaTime;
@@ -107,25 +111,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    bool checkEmpty()
-    {
-        for (int x = 0; x < 11; ++x)
-        {
-            for (int y = 0; y < 5; ++y)
-            {
-                if (enemyGrid[x][y] != null)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
-    }
-
     private void EnemyShoot()
     {
         bool shot = false;
-        while(!shot && !checkEmpty())
+        while(!shot && EnemyScript.numAliens>0)
         {
             int shootCol = Random.Range(0, enemyGrid.Count);
             for(int n = 0; n<enemyGrid[shootCol].Count && !shot; ++n)
@@ -145,9 +134,15 @@ public class GameManager : MonoBehaviour
         GameOver();
     }
 
+    private void checkWin()
+    {
+        if(EnemyScript.numAliens <= 0)
+            Time.timeScale = 0;
+    }
+
     private void GameOver()
     {
-        if (playerLives <= 0 || checkEmpty())
+        if (playerLives <= 0)
         {
             Time.timeScale = 0;
             player.gameObject.SetActive(false);
@@ -167,6 +162,6 @@ public class GameManager : MonoBehaviour
     private void UpdateScore(int scoreGained)
     {
         score += scoreGained;
-        updateScore.Invoke();
+        updateScore.Invoke(score);
     }
 }

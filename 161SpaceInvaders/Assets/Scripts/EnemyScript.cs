@@ -8,7 +8,7 @@ public class DeathEvent : UnityEvent<int>{}
 
 public class EnemyScript : MonoBehaviour
 {
-	static int numAliens = 0;
+	public static int numAliens = 0;
 
 	public EnemyEvent OnWallCollide = new EnemyEvent();
     public DeathEvent OnDeath = new DeathEvent();
@@ -42,6 +42,7 @@ public class EnemyScript : MonoBehaviour
 
         if (collider.gameObject.CompareTag("playerBullet"))
         {
+        	--numAliens;
             OnDeath.Invoke(points);
             Destroy(this.gameObject);
         }

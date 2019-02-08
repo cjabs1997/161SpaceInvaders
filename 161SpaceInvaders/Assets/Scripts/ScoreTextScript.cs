@@ -24,8 +24,8 @@ public class ScoreTextScript : MonoBehaviour
         
     }
 
-    public void UpdateScoreText()
+    public void UpdateScoreText(int score)
     {
-        scoreText.SetText("Score: {0}", GameManager.instance.score);
+        scoreText.SetText("Score: {0}", score);
     }
 }
