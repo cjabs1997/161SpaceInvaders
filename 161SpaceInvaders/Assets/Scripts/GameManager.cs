@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Transform startPosition;
     public static GameManager instance;
     public IntEvent updateScore = new IntEvent();
-    private int score;
+    public IntEvent updateLives = new IntEvent();
 
     private bool justSwapped;
     private float count;
@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private float shootInterval;
     private Player player;
     [SerializeField] private int playerLives;
+    [SerializeField] private int score;
 
     private List<List<GameObject>> enemyGrid = new List<List<GameObject>>();
 
@@ -131,6 +132,7 @@ public class GameManager : MonoBehaviour
     private void LoseLife()
     {
         --playerLives;
+        updateLives.Invoke(playerLives);
         GameOver();
     }
 

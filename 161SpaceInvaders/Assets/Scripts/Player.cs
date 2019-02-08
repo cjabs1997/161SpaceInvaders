@@ -14,6 +14,12 @@ public class Player : MonoBehaviour
     public PlayerEvent OnHit = new PlayerEvent();
     public float shootSpeed = 8.0f;
     public float moveSpeed = 10.0f;
+    public static Player instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
 
     // Start is called before the first frame update
     void Start()
