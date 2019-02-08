@@ -151,6 +151,7 @@ public class GameManager : MonoBehaviour
         if (playerLives <= 0)
         {
             Time.timeScale = 0;
+            EndGame.Invoke();
             player.gameObject.SetActive(false);
         }
     }
