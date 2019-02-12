@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Chris.unity
     guid: 57fe79b086ee7af448c2b3e16acc2908
-  - enabled: 1
-    path: Assets/Scenes/Ryan.unity
-    guid: 7ab73fca04b4efa489eb8d2d57b5a4a9
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
