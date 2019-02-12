@@ -649,9 +649,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5900116416932537096, guid: a2cca25151db4344799787ea6ae6f1c3,
     type: 3}
+  enemyPrefab1: {fileID: 5900116416932537096, guid: 2b03864ace8e29949b1c1e252638c524,
+    type: 3}
+  enemyPrefab2: {fileID: 5900116416932537096, guid: b6d33ef5647bd7b4293854f140367c0b,
+    type: 3}
   enemyBulletPrefab: {fileID: 2902067666017816252, guid: 67dcf20382b6f88458a52b24e8ecb0f8,
     type: 3}
+  enemyBulletPrefab1: {fileID: 2902067666017816252, guid: 4b9918903b292ac4c9b154cf8024dafc,
+    type: 3}
+  enemyBulletPrefab2: {fileID: 2902067666017816252, guid: c1e8067e672c29b4e9b62d9fece856bb,
+    type: 3}
   startPosition: {fileID: 1714969189}
+  EndGame:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
   playerLives: 0
   score: 0
 --- !u!4 &1714969189

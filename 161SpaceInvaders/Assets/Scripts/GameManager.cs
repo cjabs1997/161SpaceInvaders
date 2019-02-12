@@ -8,7 +8,11 @@ public class IntEvent : UnityEvent<int> {}
 public class GameManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
+    public GameObject enemyPrefab1;
+    public GameObject enemyPrefab2;
     public GameObject enemyBulletPrefab;
+    public GameObject enemyBulletPrefab1;
+    public GameObject enemyBulletPrefab2;
     public Transform startPosition;
     public static GameManager instance;
     public IntEvent updateScore = new IntEvent();
@@ -78,9 +82,22 @@ public class GameManager : MonoBehaviour
             for(int y = 0; y < 5; y++)
             { 
                 Vector2 spawnPostion = new Vector2(startPosition.position.x + x * 1.15f, startPosition.position.y + y);
-                GameObject newEnemy = Instantiate(enemyPrefab, spawnPostion, Quaternion.identity);
-
-                newEnemy.GetComponent<Shoot>().bullet = enemyBulletPrefab;
+                GameObject newEnemy;
+                if(y<=1)
+                {
+                    newEnemy = Instantiate(enemyPrefab, spawnPostion, Quaternion.identity);
+                    newEnemy.GetComponent<Shoot>().bullet = enemyBulletPrefab;
+                }
+                else if(y == 2 || y == 3)
+                {
+                    newEnemy = Instantiate(enemyPrefab1, spawnPostion, Quaternion.identity);
+                    newEnemy.GetComponent<Shoot>().bullet = enemyBulletPrefab1;
+                }
+                else
+                {
+                    newEnemy = Instantiate(enemyPrefab2, spawnPostion, Quaternion.identity);
+                    newEnemy.GetComponent<Shoot>().bullet = enemyBulletPrefab2;
+                }
 
                 newEnemy.GetComponent<EnemyScript>().moveSpeed = 2.0f;
                 newEnemy.GetComponent<EnemyScript>().shootSpeed = 5.0f;
